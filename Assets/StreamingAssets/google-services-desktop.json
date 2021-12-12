@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "395537100966",
+    "project_id": "christiansoe-2be0a",
+    "storage_bucket": "christiansoe-2be0a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395537100966:android:4812399805d89bbc6fc467",
+        "android_client_info": {
+          "package_name": "com.company.emilie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395537100966-qf733fig2b1oujh8spuq4unonjbloe5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzYZeMO58IT6TcJkvDcUu-pDhGSYzUeeA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395537100966-qf733fig2b1oujh8spuq4unonjbloe5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
