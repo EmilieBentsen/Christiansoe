@@ -20,26 +20,26 @@ public class AudioController : MonoBehaviour
         //Her instatntieres lydpunkterne
         lydpunkterGrøn.AddRange(new List<LydPunkt>
         {
-            new LydPunkt("gyldenløves bastion", 55.69875, 12.56423, "tekstspor"),
-            new LydPunkt("Rantzaus bastion", 55.6921384, 125546737, "sydturen"),
-            new LydPunkt("Verdens ende", 55.6921384, 125546737, "kirketuren"),
-            new LydPunkt("Hertugindens bastion", 55.6921384, 125546737, "vælgEnRute"),
+            new LydPunkt("gyldenløves bastion", 55.72053, 12.56013, "tekstspor"),
+            new LydPunkt("Rantzaus bastion", 0, 0, "sydturen"),
+            new LydPunkt("Verdens ende", 0, 0, "kirketuren"),
+            new LydPunkt("Hertugindens bastion", 0, 0, "vælgEnRute"),
         });
 
         lydpunkterRød.AddRange(new List<LydPunkt>
         {
-            new LydPunkt("Store tårn", 55.6921384, 125546737, "tekstspor"),
-            new LydPunkt("Kirken", 55.6921384, 125546737, "sydturen"),
-            new LydPunkt("Skolen", 55.6921384, 125546737, "kirketuren"),
-            new LydPunkt("Kirkegården", 55.6921384, 125546737, "vælgEnRute"),
+            new LydPunkt("Store tårn", 0, 0, "tekstspor"),
+            new LydPunkt("Kirken", 0, 0, "sydturen"),
+            new LydPunkt("Skolen", 0, 0, "kirketuren"),
+            new LydPunkt("Kirkegården", 0, 0, "vælgEnRute"),
         });
 
         lydpunkterBlå.AddRange(new List<LydPunkt>
         {
-            new LydPunkt("Juuls bastion", 55.6921384, 125546737, "tekstspor"),
-            new LydPunkt("Kongens bastion", 55.6921384, 125546737, "sydturen"),
-            new LydPunkt("Dronningens bastion", 55.6921384, 125546737, "kirketuren"),
-            new LydPunkt("Bjelkes bastion", 55.6921384, 125546737, "vælgEnRute"),
+            new LydPunkt("Juuls bastion", 0, 0, "tekstspor"),
+            new LydPunkt("Kongens bastion", 0, 0, "sydturen"),
+            new LydPunkt("Dronningens bastion", 0, 0, "kirketuren"),
+            new LydPunkt("Bjelkes bastion", 0, 0, "vælgEnRute"),
         });
 
     }
