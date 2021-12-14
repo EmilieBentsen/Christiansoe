@@ -13,7 +13,6 @@ public class SceneController : MonoBehaviour
     public static string lastScene;
     public static string quizLetter;
     public static int quizCount;
-    public static DateTime savedTimeQuiz;
 
 
     // Start is called before the first frame update
@@ -50,6 +49,7 @@ public class SceneController : MonoBehaviour
     {
        
         SceneManager.LoadSceneAsync(scene);
+
        
     }
 

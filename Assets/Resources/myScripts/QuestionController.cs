@@ -9,11 +9,13 @@ using Firebase.Extensions;
 public class QuestionController : MonoBehaviour
 {
     // Start is called before the first frame update
-    //Denne klasse opretter spørgsmål i databasen og henter dem så de bliver vist i random rækkefølge
+    //Denne klasse opretter spï¿½rgsmï¿½l i databasen og henter dem sï¿½ de bliver vist i random rï¿½kkefï¿½lge
     public Text spm1;
-    
-  
+    public int quiznr;
+    public int rightAnswer;
+    public Button buttonText;
     private static QuestionController instance = null;
+    Dictionary<string, object> questions = new Dictionary<string, object>();
 
     void Awake()
     {
@@ -30,52 +32,48 @@ public class QuestionController : MonoBehaviour
 
     void Start()
     {
-        //Husk at fylde de rigtige spørgsmål i
+        //Husk at fylde de rigtige spï¿½rgsmï¿½l i
 
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
         CollectionReference quizRef = db.Collection("A");
         quizRef.Document("1").SetAsync(new Dictionary<string, object>(){
-        { "SP", "hvem har lagt navn til øen?" },
-        { "svar1", "Frederik" },
-        { "svar2", "Viggo" },
-        { "rigtígt", "Christian" },
-        { "BSV", false }
+        { "SP", "hvem har lagt navn til ï¿½en?" },
+        { "1", "Frederik" },
+        { "9", "Christian" },
+        { "2", "Viggo" },
     }).ContinueWithOnMainThread(task =>
         quizRef.Document("2").SetAsync(new Dictionary<string, object>(){
-        { "SP", "hvem har lagt navn til øen?" },
-        { "svar1", "Frederik" },
-        { "svar2", "Viggo" },
-        { "rigtígt", "Christian" },
-        { "BSV", false }
+        { "SP", "hvad hedder tÃ¥rnet?" },
+        { "9", "Store tÃ¥rn" },
+        { "2", "Lille tÃ¥rn" },
+        { "1", "ChristianstÃ¥rn" },
         })
         ).ContinueWithOnMainThread(task =>
             quizRef.Document("3").SetAsync(new Dictionary<string, object>(){
-        { "SP", "hvem har lagt navn til øen?" },
-        { "svar1", "Frederik" },
-        { "svar2", "Viggo" },
-        { "rigtígt", "Christian" },
-        { "BSV", false }
+        { "SP", "hvilke dyr er populÃ¦re pÃ¥ Ã¸en?" },
+        { "1", "FrÃ¸er" },
+        { "9", "MÃ¥ger" },
+        { "2", "Pingviner" },
             })
         ).ContinueWithOnMainThread(task =>
             quizRef.Document("4").SetAsync(new Dictionary<string, object>(){
-        { "SP", "hvem har lagt navn til øen?" },
-        { "svar1", "Frederik" },
-        { "svar2", "Viggo" },
-        { "rigtígt", "Christian" },
-        { "BSV", false }
+        { "SP", "Hvor stor er Ã¸en?" },
+        { "9", "1000 kvm" },
+        { "1", "10000 kvm" },
+        { "2", "1000000 kvm" },
             })
         ).ContinueWithOnMainThread(task =>
             quizRef.Document("5").SetAsync(new Dictionary<string, object>(){
-        { "SP", "hvem har lagt navn til øen?" },
-        { "svar1", "Frederik" },
-        { "svar2", "Viggo" },
-        { "rigtígt", "Christian" },
-        { "BSV", false }
+        { "SP", "hvem bestemmer pÃ¥ Ã¸en?" },
+        { "9", "Ã˜lederen" },
+        { "1", "Dem alle" },
+        { "2", "Et rÃ¥d" },
             })
         );
-
-        StartQuiz();
+        quiznr = 1;
+        StartQuiz(quiznr.ToString());
+        
     }
 
     // Update is called once per frame
@@ -84,13 +82,23 @@ public class QuestionController : MonoBehaviour
        
     }
 
-    public void StartQuiz()
+    public void Score(string number)
+    {
+        if(number == rightAnswer.ToString())
+        {
+            QuizController.scoreNumber++;
+        }
+        quiznr++;
+        StartQuiz(quiznr.ToString());
+
+    }
+
+    public void StartQuiz(string quizNumber)
     {
         string quizLetter = SceneController.quizLetter;
-        Dictionary<string, object> questions = new Dictionary<string, object>();
         FirebaseFirestore db = FirebaseFirestore.DefaultInstance;
 
-        DocumentReference docRef = db.Collection(quizLetter).Document("1");
+        DocumentReference docRef = db.Collection(quizLetter).Document(quizNumber);
         docRef.GetSnapshotAsync().ContinueWithOnMainThread(task =>
         {
             DocumentSnapshot snapshot = task.Result;
@@ -98,6 +106,10 @@ public class QuestionController : MonoBehaviour
             {
                 Debug.Log(String.Format("Document data for {0} document:", snapshot.Id));
                 questions = snapshot.ToDictionary();
+
+
+                int count = 1;
+                
                 foreach (KeyValuePair<string, object> pair in questions)
                 {
                     Debug.Log(String.Format("{0}: {1}", pair.Key, pair.Value));
@@ -112,13 +124,14 @@ public class QuestionController : MonoBehaviour
                     else
                     {
 
-                        int rnd = UnityEngine.Random.Range(1, 4);
-                        for (int i = 0; i < 3; i++)
+                        GameObject.Find("Answr" + count.ToString()).GetComponentInChildren<Text>().text = pair.Value.ToString();
+                        if(pair.Key == "9")
                         {
-
-                            GameObject.Find("Answr" + rnd.ToString()).GetComponentInChildren<Text>().text = pair.Value.ToString();
-
+                            rightAnswer = count;
+                            Debug.Log("rigtigt svar: " + rightAnswer);
                         }
+                        count++;
+
                         Debug.Log(String.Format("Document {0} does not exist!", snapshot.Id));
                     }
                 }

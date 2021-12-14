@@ -10,11 +10,15 @@ public class QuizController : MonoBehaviour
     //Denne klasse tager imod brugernavn og gemmer det i SceneControlleren, SceneControlleren indeholder de væsenligeste statiske variabler i programmet
     public InputField input;
     private string name;
+    public static DateTime startTime;
+    public static TimeSpan elapsedTime;
 
+    public static int scoreNumber;
     void Start()
     {
-       
-        
+        startTime = DateTime.Now;
+        elapsedTime = DateTime.Now - startTime;
+
     }
 
     public void GetInputName()
@@ -22,7 +26,7 @@ public class QuizController : MonoBehaviour
         name = input.text;
         Debug.Log(name);
         SceneController.quizName = name;
-        SceneController.savedTimeQuiz = DateTime.Now;
+        
     }
 
     // Update is called once per frame
